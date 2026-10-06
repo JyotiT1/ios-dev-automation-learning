@@ -152,3 +152,176 @@ build/
 .DS_Store
 .idea/
 .vscode/
+
+
+
+
+
+####################################
+# =========================
+# Secrets / Credentials
+# =========================
+
+*.secret
+*.secrets
+*.credentials
+credentials.json
+credentials.yaml
+credentials.yml
+secrets.yaml
+secrets.yml
+
+# Private keys / SSH keys
+id_rsa
+*.pub
+*.pem
+*.key
+
+# Firebase / cloud credentials
+google-services.json
+GoogleService-Info.plist
+service-account*.json
+
+# Authentication / tokens
+*.token
+*.token.json
+token.json
+tokens.json
+auth.json
+credentials.json
+
+# =========================
+# Local Appium / Automation
+# =========================
+
+*.udid
+device.local.*
+local.capabilities.*
+capabilities.local.*
+wdio.local.*
+wdio.*.local.*
+
+# =========================
+# Generated artifacts
+# =========================
+
+*.ipa
+*.app
+*.xcarchive
+*.dSYM
+*.zip
+*.tar
+*.gz
+
+# =========================
+# OS / macOS
+# =========================
+
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# =========================
+# Xcode
+# =========================
+
+DerivedData/
+build/
+xcuserdata/
+*.xcuserstate
+*.xcscmblueprint
+*.xccheckout
+*.moved-aside
+*.hmap
+
+# =========================
+# Swift Package Manager
+# =========================
+
+.build/
+.swiftpm/
+
+# Keep Package.resolved if this is an application
+# Package.resolved
+
+# =========================
+# CocoaPods
+# =========================
+
+Pods/
+
+# =========================
+# Node.js
+# =========================
+
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# =========================
+# WebdriverIO
+# =========================
+
+.wdio/
+wdio-*.log
+logs/
+
+# =========================
+# Appium
+# =========================
+
+.appium/
+appium.log
+
+# =========================
+# Test Reports
+# =========================
+
+allure-results/
+allure-report/
+test-results/
+reports/
+screenshots/
+videos/
+coverage/
+
+# =========================
+# TypeScript
+# =========================
+
+*.tsbuildinfo
+dist/
+
+# =========================
+# IDE
+# =========================
+
+.idea/
+*.iml
+
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/tasks.json
+!.vscode/launch.json
+
+# =========================
+# Temporary files
+# =========================
+
+*.tmp
+*.temp
+*.swp
+*.swo
+*.bak
+*.orig
+*~
+
+# =========================
+# Windows
+# =========================
+
+Thumbs.db
