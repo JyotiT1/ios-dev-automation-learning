@@ -8,25 +8,22 @@ struct AppTextField: View {
 
     @Binding var text: String
 
-    var isSecure: Bool = false
-
+    let isSecure: Bool
     let accessibilityID: String
 
     var body: some View {
 
-        VStack(
-            alignment: .leading,
-            spacing: 7
-        ) {
+        VStack(alignment: .leading, spacing: 8) {
 
             Text(title)
                 .font(.subheadline)
                 .fontWeight(.semibold)
 
-            HStack(spacing: 10) {
+            HStack(spacing: 12) {
 
                 Image(systemName: icon)
-                    .foregroundStyle(.blue)
+                    .foregroundStyle(.secondary)
+                    .frame(width: 20)
 
                 if isSecure {
 
@@ -34,6 +31,9 @@ struct AppTextField: View {
                         placeholder,
                         text: $text
                     )
+                    .textInputAutocapitalization(.never)
+                    .autocorrectionDisabled()
+                    .accessibilityIdentifier(accessibilityID)
 
                 } else {
 
@@ -41,8 +41,9 @@ struct AppTextField: View {
                         placeholder,
                         text: $text
                     )
-                    .autocorrectionDisabled()
                     .textInputAutocapitalization(.never)
+                    .autocorrectionDisabled()
+                    .accessibilityIdentifier(accessibilityID)
                 }
             }
             .padding()
@@ -53,9 +54,6 @@ struct AppTextField: View {
                 RoundedRectangle(
                     cornerRadius: 12
                 )
-            )
-            .accessibilityIdentifier(
-                accessibilityID
             )
         }
     }

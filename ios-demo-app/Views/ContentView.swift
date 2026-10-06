@@ -2,25 +2,30 @@ import SwiftUI
 
 struct ContentView: View {
 
+    // MARK: - State
+
     @State private var username = ""
     @State private var password = ""
 
     @State private var isLoggedIn = false
     @State private var showLoginError = false
-    
+
+    // MARK: - Body
 
     var body: some View {
 
-        if isLoggedIn {
+        Group {
+            if isLoggedIn {
 
-            HomeView(
-                username: username,
-                onLogout: logout
-            )
+                HomeView(
+                    username: username,
+                    onLogout: logout
+                )
 
-        } else {
+            } else {
 
-            loginView
+                loginView
+            }
         }
     }
 
@@ -28,123 +33,79 @@ struct ContentView: View {
 
     private var loginView: some View {
 
-        NavigationStack {
+        ZStack {
 
-            ZStack {
+            LinearGradient(
+                colors: [
+                    Color.blue.opacity(0.15),
+                    Color.purple.opacity(0.10)
+                ],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+            .ignoresSafeArea()
 
-                Color(.systemGroupedBackground)
-                    .ignoresSafeArea()
+            ScrollView {
 
-                ScrollView {
+                VStack(spacing: 24) {
 
-                    VStack(spacing: 22) {
+                    // App Logo
+                    AppLogoView()
 
-                        AppLogoView()
+                    // App Branding
+                    AppBrandingView()
 
-                        AppBrandingView()
+                    // Login Card
+                    VStack(spacing: 18) {
 
-                        loginCard
-
-                        Text(
-                            "Automation Learning - SDET"
+                        // Username
+                        AppTextField(
+                            title: "Username",
+                            placeholder: "Enter username",
+                            icon: "person.fill",
+                            text: $username,
+                            isSecure: false,
+                            accessibilityID: "usernameField"
                         )
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+
+                        // Password
+                        AppTextField(
+                            title: "Password",
+                            placeholder: "Enter password",
+                            icon: "lock.fill",
+                            text: $password,
+                            isSecure: true,
+                            accessibilityID: "passwordField"
+                        )
+
+                        // Login Error
+                        if showLoginError {
+                            LoginErrorView()
+                        }
+
+                        // Login Button
+                        PrimaryButton(
+                            title: "Login",
+                            icon: "arrow.right.circle.fill",
+                            action: login,
+                            accessibilityID: "loginButton"
+                        )
+
+                        // Demo Credentials
+                        DemoCredentialsView()
                     }
-                    .padding(20)
+                    .padding(24)
+                    .background(.regularMaterial)
+                    .clipShape(
+                        RoundedRectangle(
+                            cornerRadius: 24
+                        )
+                    )
                 }
+                .padding()
             }
-            .toolbar(
-                .hidden,
-                for: .navigationBar
-            )
         }
     }
-
-    // MARK: - Login Card
-
-    private var loginCard: some View {
-
-        VStack(spacing: 18) {
-
-            VStack(
-                alignment: .leading,
-                spacing: 4
-            ) {
-
-                Text("Welcome Back")
-                    .font(.title2)
-                    .fontWeight(.bold)
-
-                Text("Sign in to continue")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-            }
-            .frame(
-                maxWidth: .infinity,
-                alignment: .leading
-            )
-
-
-            // Username
-
-            AppTextField(
-                title: "Username",
-                placeholder: "Enter username",
-                icon: "person.fill",
-                text: $username,
-                accessibilityID: "usernameField"
-            )
-
-
-            // Password
-
-            AppTextField(
-                title: "Password",
-                placeholder: "Enter password",
-                icon: "lock.fill",
-                text: $password,
-                isSecure: true,
-                accessibilityID: "passwordField"
-            )
-
-
-            // Error
-
-            if showLoginError {
-                LoginErrorView()
-            }
-
-
-            // Login
-
-            PrimaryButton(
-                title: "Login",
-                icon: "arrow.right",
-                action: login,
-                accessibilityID: "loginButton"
-            )
-
-
-            // Demo Credentials
-
-            DemoCredentialsView()
-        }
-        .padding(24)
-        .background(.background)
-        .clipShape(
-            RoundedRectangle(
-                cornerRadius: 20
-            )
-        )
-        .shadow(
-            color: .black.opacity(0.08),
-            radius: 12,
-            x: 0,
-            y: 6
-        )
-    }
-
 
     // MARK: - Login
 
@@ -162,7 +123,6 @@ struct ContentView: View {
         }
     }
 
-
     // MARK: - Logout
 
     private func logout() {
@@ -170,11 +130,7 @@ struct ContentView: View {
         username = ""
         password = ""
 
-        isLoggedIn = false
         showLoginError = false
+        isLoggedIn = false
     }
-}
-
-#Preview {
-    ContentView()
 }
